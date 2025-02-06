@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-6">
+        @if(!!generatedData) {
+        <qrcode [qrdata]="generatedData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        } @else {
+        Submit to see qr
+        }
+    </div>
+    <div class="col-6">
+        <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="iban">IBAN</label>
+                <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
+                @if(submit && ibanForm.invalid) {
+                @if(iban?.hasError('required')) {
+                <div class="invalid-feedback">
+                    This field is required.
+                </div>
+                }
+                @if(iban?.hasError('invalidIban')) {
+                <div class="invalid-feedback">
+                    Entered IBAN is invalid
+                </div>
+                }
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
+                @if(submit && iban?.hasError('required')) {
+                <div class="invalid-feedback">
+                    This field is required.
+                </div>
+                }
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
