@@ -7,15 +7,15 @@ import { NotFoundComponent } from './pages/util/not-found/not-found.component';
 export const routes: Routes = [
     {
         path: 'home',
-        component: HomeComponent
+        loadComponent: () => import('./pages/home/home.component').then(x => x.HomeComponent)
     },
     {
         path: 'about',
-        component: AboutComponent
+        loadComponent: () => import('./pages/about/about.component').then(x => x.AboutComponent)
     },
     {
         path: 'generate-qr',
-        component: GenerateQrComponent
+        loadComponent: () => import('./pages/generate-qr/generate-qr.component').then(x => x.GenerateQrComponent)
     },
     {
         path: '',
@@ -24,6 +24,6 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        component: NotFoundComponent
+        loadComponent: () => import('./pages/util/not-found/not-found.component').then(x => x.NotFoundComponent)
     }
 ];
