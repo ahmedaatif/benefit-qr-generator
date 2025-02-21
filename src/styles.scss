@@ -1,5 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+// TODO replace import with @use or @forward for future support
 
-/* Importing Bootstrap SCSS file. */
-@use 'bootstrap/scss/bootstrap';
-@forward 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import "./scss/theme-colors.scss";
+@import "./scss/util.scss";
+
+@import "bootstrap/scss/bootstrap";
