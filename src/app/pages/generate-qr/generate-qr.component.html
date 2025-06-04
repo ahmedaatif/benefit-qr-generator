@@ -1,18 +1,19 @@
-<div class="row">
-    <div class="col-6">
+<div class="row gy-2 ">
+    <div class="col-lg-6 col-12 order-lg-1 order-2">
         <div class="card">
-            <div class="card-body text-center">
-                @if(!!generatedData) {
-                <qrcode [qrdata]="generatedData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-                } @else {
-                <span class="text-muted m-5">Fill in the form to generate a QR code</span>
-                }
+            <div class="card-body text-center min-height-lg-500px d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                    @if(!!generatedData) {
+                    <qrcode [qrdata]="generatedData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                    } @else {
+                    <span class="text-muted">Fill in the form to generate a QR code</span> }
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6 col-12 order-lg-2 order-1">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body min-height-lg-500px d-flex align-items-center">
                 <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" class="row gy-2">
                     <div class="col-12">
                         <label for="iban">IBAN</label>
