@@ -1,23 +1,21 @@
-import { JsonPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { QRCodeComponent } from 'angularx-qrcode';
-import { GenerateQrFormInterface } from '../../interfaces/generate-qr-form.interface';
-import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
+import { BenefitQrCodeInterface, GenerateQrFormInterface } from '../../interfaces/generate-qr-form.interface';
+import { DEFAULT_QR_CODE_DATA } from '../../constants/generate-qr.constants';
 
 @Component({
   selector: 'app-generated-qr-code-display',
-  imports: [QRCodeComponent, JsonPipe],
+  imports: [QRCodeComponent],
   templateUrl: './generated-qr-code-display.component.html',
   styleUrl: './generated-qr-code-display.component.scss'
 })
 export class GeneratedQrCodeDisplayComponent {
-  @Input() public qrData: GenerateQrFormInterface = this.getDefaultQrData();
+  @Input() public qrData: GenerateQrFormInterface = DEFAULT_QR_CODE_DATA;
 
-  private getDefaultQrData(): GenerateQrFormInterface {
-    return {
-      iban: '',
-      amount: 0,
-      pageSize: QrDisplaySizeEnum.A4
-    };
+  public populateQrCode(qrData: GenerateQrFormInterface): string {
+    return JSON.stringify({
+      iban: qrData.iban,
+      amount: qrData.amount
+    } as BenefitQrCodeInterface)
   }
 }

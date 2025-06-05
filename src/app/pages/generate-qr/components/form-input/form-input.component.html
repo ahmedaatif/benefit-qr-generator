@@ -1,5 +1,5 @@
 <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" class="row gy-2">
-    <div class="col-12">
+    <div class="col-12 col-lg-8">
         <label for="iban">IBAN</label>
         <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
         <div id="ibanHelp" class="form-text">International Bank Account Number</div>
@@ -17,7 +17,7 @@
         }
     </div>
 
-    <div class="col-12">
+    <div class="col-12 col-lg-4">
         <label for="amount">Amount</label>
         <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
         @if(submit && amount?.hasError('required')) {
@@ -25,6 +25,17 @@
             This field is required.
         </div>
         }
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <label for="header">Header</label>
+        <input type="text" formControlName="header" class="form-control" placeholder="Optional">
+        <div id="header" class="form-text">Will be displayed above the QR code</div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <label for="footer">Footer</label>
+        <input type="text" formControlName="footer" class="form-control" placeholder="Optional">
+        <div id="footer" class="form-text">Will be displayed below the QR code</div>
     </div>
     <div class="col">
         <button type="submit" class="btn btn-primary">Submit</button>
