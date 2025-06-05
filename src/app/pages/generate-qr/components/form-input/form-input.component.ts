@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, OutputEmitterRef } from '@angular/core
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ibanValidator } from '../../../../shared/validators/iban-validator';
 import { output } from '@angular/core';
+import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
 
 @Component({
   selector: 'app-form-input',
@@ -16,6 +17,7 @@ export class FormInputComponent {
   public ibanForm = new FormGroup({
     iban: new FormControl<string | null>(null, [Validators.required, ibanValidator()]),
     amount: new FormControl<number | null>(null, [Validators.required]),
+    pageSize: new FormControl<QrDisplaySizeEnum>(QrDisplaySizeEnum.A4)
   });
 
   public get iban() {
