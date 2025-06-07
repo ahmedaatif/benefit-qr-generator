@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Output, OutputEmitterRef } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ibanValidator } from '../../../../shared/validators/iban-validator';
-import { output } from '@angular/core';
 import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
 import { BenefitQrCodeInterface } from '../../interfaces/generate-qr-form.interface';
 
@@ -14,6 +13,10 @@ import { BenefitQrCodeInterface } from '../../interfaces/generate-qr-form.interf
 export class FormInputComponent {
 
   @Output() private formData: EventEmitter<BenefitQrCodeInterface> = new EventEmitter<BenefitQrCodeInterface>();
+
+  public submit: boolean = false;
+
+  public qrDisplaySizeEnum: typeof QrDisplaySizeEnum = QrDisplaySizeEnum;
 
   public ibanForm = new FormGroup({
     iban: new FormControl<string>('', [Validators.required, ibanValidator()]),
@@ -31,9 +34,8 @@ export class FormInputComponent {
     return this.ibanForm.get('amount');
   }
 
-  public submit: boolean = false;
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.submit = true;
     if (this.ibanForm.invalid) return;
     this.formData.emit(this.ibanForm.getRawValue() as BenefitQrCodeInterface);
