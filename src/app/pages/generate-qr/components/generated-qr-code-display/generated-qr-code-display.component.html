@@ -1,10 +1,19 @@
-<div class="print-aspect-ratio">
-    @if(!!qrData.header) {
-    <h2>{{qrData.header}}</h2>
-    }
-    <qrcode [width]="500" [qrdata]="populateQrCode(qrData)" [elementType]="'svg'" [errorCorrectionLevel]="'M'"></qrcode>
+<div class="width-300px print-aspect-ratio h-100 d-flex flex-column align-items-center justify-content-between overflow-hidden">
+    <div class="w-100">
+        @if(!!qrData.header) {
+        <div class="bg-primary p-2">
+            <h4 class="text-white">{{qrData.header}}</h4>
+        </div> }
+    </div>
+    <div [class]="{'blur': qrData.iban == ''}">
+        <qrcode [width]="140" [qrdata]="populateQrCode(qrData)" [elementType]="'svg'" [errorCorrectionLevel]="'M'"></qrcode>
+        @if(qrData.showIban) {
+        <h5>{{qrData.iban}}</h5> }
+    </div>
     @if(!!qrData.footer) {
     <h4>{{qrData.footer}}</h4>
     }
-    <small class="text-secondary">Generated with <b>benefit.ahmed.plus</b></small>
+    <div class="bg-secondary w-100 p-2">
+        <small class="text-white">Generated with <b>benefit.ahmed.plus</b></small>
+    </div>
 </div>

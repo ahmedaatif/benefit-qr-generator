@@ -5,6 +5,7 @@ import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 import { GenerateQrFormInterface } from './interfaces/generate-qr-form.interface';
 import { getHeightFromQrDisplaySize, getWidthFromQrDisplaySize } from './util/generate-qr-code-util';
+import { DEFAULT_QR_CODE_DATA } from './constants/generate-qr.constants';
 @Component({
   selector: 'app-generate-qr',
   imports: [FormInputComponent, GeneratedQrCodeDisplayComponent],
@@ -16,14 +17,14 @@ export class GenerateQrComponent {
 
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-  public qrData: GenerateQrFormInterface | undefined = undefined;
+  public qrData: GenerateQrFormInterface = DEFAULT_QR_CODE_DATA;
 
   public setQrData(data: GenerateQrFormInterface): void {
     this.qrData = data;
-    this.saveQrImage(data);
   }
 
-  private saveQrImage(data: GenerateQrFormInterface) {
+  public saveQrImage() {
+    const data = this.qrData;
     setTimeout(() => {
       this.cdr.detectChanges();
       const node = this.qrDisplayRef?.nativeElement;

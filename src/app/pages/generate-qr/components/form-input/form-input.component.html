@@ -1,4 +1,4 @@
-<form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" class="row gy-2">
+<form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" (change)="onChange()" class="row gy-2">
     <div class="col-12 col-lg-8">
         <label for="iban">IBAN</label>
         <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
@@ -37,7 +37,7 @@
         <input type="text" formControlName="footer" class="form-control" placeholder="Optional">
         <div id="footer" class="form-text">Will be displayed below the QR code</div>
     </div>
-    <div class="col-12">
+    <div class="col-12 col-lg-6">
         <label for="pageSize">Page Size</label>
         <select class="form-select" formControlName="pageSize">
             <option [value]="qrDisplaySizeEnum.A3">A3 (297 x 420mm)</option>
@@ -45,7 +45,15 @@
             <option [value]="qrDisplaySizeEnum.A5">A5 (148 x 210mm)</option>
         </select>
     </div>
+    <div class="col-12 col-lg-6">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
+            <label class="form-check-label" for="showIban">
+                Show IBAN
+            </label>
+        </div>
+    </div>
     <div class="col">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>

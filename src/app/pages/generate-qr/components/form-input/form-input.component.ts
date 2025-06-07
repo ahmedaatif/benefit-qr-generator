@@ -13,6 +13,7 @@ import { GenerateQrFormInterface } from '../../interfaces/generate-qr-form.inter
 export class FormInputComponent {
 
   @Output() private formData: EventEmitter<GenerateQrFormInterface> = new EventEmitter<GenerateQrFormInterface>();
+  @Output() private saveQrImage: EventEmitter<void> = new EventEmitter<void>();
 
   public submit: boolean = false;
 
@@ -24,6 +25,7 @@ export class FormInputComponent {
     pageSize: new FormControl<QrDisplaySizeEnum>(QrDisplaySizeEnum.A4),
     header: new FormControl<string>(''),
     footer: new FormControl<string>(''),
+    showIban: new FormControl<boolean>(false)
   });
 
   public get iban() {
@@ -34,11 +36,14 @@ export class FormInputComponent {
     return this.ibanForm.get('amount');
   }
 
+  public onChange(): void {
+    this.formData.emit(this.ibanForm.getRawValue() as GenerateQrFormInterface);
+  }
 
   public onSubmit(): void {
     this.submit = true;
     if (this.ibanForm.invalid) return;
-    this.formData.emit(this.ibanForm.getRawValue() as GenerateQrFormInterface);
+    this.saveQrImage.emit();
     this.resetForm();
     this.submit = false;
   }
@@ -49,7 +54,8 @@ export class FormInputComponent {
       amount: null,
       pageSize: QrDisplaySizeEnum.A4,
       header: '',
-      footer: ''
+      footer: '',
+      showIban: false
     });
   }
 }

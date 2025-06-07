@@ -4,5 +4,6 @@ import { GenerateQrFormInterface } from "../interfaces/generate-qr-form.interfac
 export const DEFAULT_QR_CODE_DATA: GenerateQrFormInterface = {
     iban: '',
     amount: 0,
-    pageSize: QrDisplaySizeEnum.A4
+    pageSize: QrDisplaySizeEnum.A4,
+    showIban: true
 };

@@ -1,22 +1,19 @@
-<div class="row gy-2 ">
+<div class="row gy-2">
     <div class="col-lg-6 col-12 order-lg-1 order-2">
         <div class="card">
             <div class="card-body text-center min-height-lg-500px d-flex align-items-center justify-content-center">
-                @if(!!qrData) {
-                <div #qrCodeDisplay>
-                    <app-generated-qr-code-display [qrData]="qrData"></app-generated-qr-code-display>
-
+                <div class="shadow">
+                    <div #qrCodeDisplay>
+                        <app-generated-qr-code-display [qrData]="qrData"></app-generated-qr-code-display>
+                    </div>
                 </div>
-                } @else {
-                <span class="text-muted">Fill in the form to generate a QR code</span>
-                }
             </div>
         </div>
     </div>
     <div class="col-lg-6 col-12 order-lg-2 order-1">
         <div class="card">
             <div class="card-body min-height-lg-500px d-flex align-items-center">
-                <app-form-input (formData)="setQrData($event)"></app-form-input>
+                <app-form-input (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
             </div>
         </div>
     </div>
