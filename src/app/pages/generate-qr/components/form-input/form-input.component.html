@@ -1,0 +1,60 @@
+<form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" (change)="onChange()" class="row gy-2">
+    <div class="col-12 col-lg-8">
+        <label for="iban">IBAN <span class="text-danger">*</span></label>
+        <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
+        <div id="ibanHelp" class="form-text">International Bank Account Number</div>
+        @if(submit && ibanForm.invalid) {
+        @if(iban?.hasError('required')) {
+        <div class="invalid-feedback">
+            This field is required.
+        </div>
+        }
+        @if(iban?.hasError('invalidIban')) {
+        <div class="invalid-feedback">
+            Entered IBAN is invalid
+        </div>
+        }
+        }
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <label for="amount">Amount <span class="text-danger">*</span></label>
+        <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
+        @if(submit && amount?.hasError('required')) {
+        <div class="invalid-feedback">
+            This field is required.
+        </div>
+        }
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <label for="header">Header</label>
+        <input type="text" formControlName="header" class="form-control" placeholder="Optional">
+        <div id="header" class="form-text">Will be displayed above the QR code</div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <label for="footer">Footer</label>
+        <input type="text" formControlName="footer" class="form-control" placeholder="Optional">
+        <div id="footer" class="form-text">Will be displayed below the QR code</div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <label for="pageSize">Page Size</label>
+        <select class="form-select" formControlName="pageSize">
+            <option [value]="qrDisplaySizeEnum.A3">A3 (297 x 420mm)</option>
+            <option [value]="qrDisplaySizeEnum.A4">A4 (210 x 297mm)</option>
+            <option [value]="qrDisplaySizeEnum.A5">A5 (148 x 210mm)</option>
+        </select>
+    </div>
+    <div class="col-12 col-lg-6">
+        <label for="showIban"></label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
+            <label class="form-check-label" for="showIban">
+                Show IBAN
+            </label>
+        </div>
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

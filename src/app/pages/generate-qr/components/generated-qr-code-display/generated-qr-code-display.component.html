@@ -1,0 +1,19 @@
+<div class="width-300px print-aspect-ratio h-100 d-flex flex-column align-items-center justify-content-between overflow-hidden">
+    <div class="w-100">
+        @if(!!qrData.header) {
+        <div class="bg-primary p-2">
+            <h5 class="text-white mb-0">{{qrData.header}}</h5>
+        </div> }
+    </div>
+    <div [class]="{'blur': qrData.iban == ''}">
+        <qrcode [width]="140" [qrdata]="populateQrCode(qrData)" [elementType]="'svg'" [errorCorrectionLevel]="'M'"></qrcode>
+        @if(qrData.showIban && !!qrData.iban) {
+        <h6>{{qrData.iban}}</h6> }
+    </div>
+    @if(!!qrData.footer) {
+    <h5 class="p-2 mb-0">{{qrData.footer}}</h5>
+    }
+    <div class="bg-secondary w-100 p-1 d-flex justify-content-center align-items-center">
+        <small class="text-white font-size-10px">Generated with <b>benefit.ahmed.plus</b></small>
+    </div>
+</div>

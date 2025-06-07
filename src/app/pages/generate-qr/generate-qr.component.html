@@ -1,52 +1,24 @@
-<div class="row">
-    <div class="col-6">
+<div class="row gy-2">
+    <div class="col-lg-6 col-12 order-lg-1 order-2">
         <div class="card">
-            <div class="card-body text-center">
-                @if(!!generatedData) {
-                <qrcode [qrdata]="generatedData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-                } @else {
-                <span class="text-muted m-5">Fill in the form to generate a QR code</span>
-                }
+            <div class="card-body text-center min-height-lg-500px d-flex align-items-center justify-content-center">
+                <div class="shadow">
+                    <div #qrCodeDisplay>
+                        <app-generated-qr-code-display [qrData]="qrData"></app-generated-qr-code-display>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6 col-12 order-lg-2 order-1">
         <div class="card">
-            <div class="card-body">
-                <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" class="row gy-2">
-                    <div class="col-12">
-                        <label for="iban">IBAN</label>
-                        <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
-                        <div id="ibanHelp" class="form-text">International Bank Account Number</div>
-                        @if(submit && ibanForm.invalid) {
-                        @if(iban?.hasError('required')) {
-                        <div class="invalid-feedback">
-                            This field is required.
-                        </div>
-                        }
-                        @if(iban?.hasError('invalidIban')) {
-                        <div class="invalid-feedback">
-                            Entered IBAN is invalid
-                        </div>
-                        }
-                        }
-                    </div>
-
-                    <div class="col-12">
-                        <label for="amount">Amount</label>
-                        <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
-                        @if(submit && iban?.hasError('required')) {
-                        <div class="invalid-feedback">
-                            This field is required.
-                        </div>
-                        }
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+            <div class="card-body min-height-lg-500px d-flex align-items-center">
+                @if(showForm) {
+                <app-form-input class="w-100" (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
+                } @else {
+                <app-generated-successfully class="w-100" (showForm)="showFormAndReset()"></app-generated-successfully>
+                }
             </div>
         </div>
-
     </div>
 </div>
