@@ -1,6 +1,6 @@
 <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" (change)="onChange()" class="row gy-2">
     <div class="col-12 col-lg-8">
-        <label for="iban">IBAN</label>
+        <label for="iban">IBAN <span class="text-danger">*</span></label>
         <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
         <div id="ibanHelp" class="form-text">International Bank Account Number</div>
         @if(submit && ibanForm.invalid) {
@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-12 col-lg-4">
-        <label for="amount">Amount</label>
+        <label for="amount">Amount <span class="text-danger">*</span></label>
         <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
         @if(submit && amount?.hasError('required')) {
         <div class="invalid-feedback">
@@ -46,6 +46,7 @@
         </select>
     </div>
     <div class="col-12 col-lg-6">
+        <label for="showIban"></label>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
             <label class="form-check-label" for="showIban">

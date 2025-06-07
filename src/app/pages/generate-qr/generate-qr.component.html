@@ -13,7 +13,11 @@
     <div class="col-lg-6 col-12 order-lg-2 order-1">
         <div class="card">
             <div class="card-body min-height-lg-500px d-flex align-items-center">
-                <app-form-input (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
+                @if(showForm) {
+                <app-form-input class="w-100" (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
+                } @else {
+                <app-generated-successfully class="w-100" (showForm)="showFormAndReset()"></app-generated-successfully>
+                }
             </div>
         </div>
     </div>
