@@ -3,7 +3,10 @@
         <div class="card">
             <div class="card-body text-center min-height-lg-500px d-flex align-items-center justify-content-center">
                 @if(!!qrData) {
-                <app-generated-qr-code-display [qrData]="qrData"></app-generated-qr-code-display>
+                <div #qrCodeDisplay>
+                    <app-generated-qr-code-display [qrData]="qrData"></app-generated-qr-code-display>
+
+                </div>
                 } @else {
                 <span class="text-muted">Fill in the form to generate a QR code</span>
                 }

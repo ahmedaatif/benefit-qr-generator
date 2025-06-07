@@ -1,7 +1,10 @@
-@if(!!qrData.header) {
-{{qrData.header}}
-}
-<qrcode [qrdata]="populateQrCode(qrData)" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-@if(!!qrData.footer) {
-{{qrData.footer}}
-}
+<div class="print-aspect-ratio">
+    @if(!!qrData.header) {
+    <h2>{{qrData.header}}</h2>
+    }
+    <qrcode [width]="500" [qrdata]="populateQrCode(qrData)" [elementType]="'svg'" [errorCorrectionLevel]="'M'"></qrcode>
+    @if(!!qrData.footer) {
+    <h4>{{qrData.footer}}</h4>
+    }
+    <small class="text-secondary">Generated with <b>benefit.ahmed.plus</b></small>
+</div>

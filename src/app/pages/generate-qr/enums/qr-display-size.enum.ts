@@ -1,5 +1,5 @@
 export enum QrDisplaySizeEnum {
-    A3,
-    A4,
-    A5,
+    A3 = '3508x4961',
+    A4 = '2480x3508',
+    A5 = '1748x2480',
 }
