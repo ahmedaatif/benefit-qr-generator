@@ -1,0 +1,7 @@
+@if(!!qrData.header) {
+{{qrData.header}}
+}
+<qrcode [qrdata]="populateQrCode(qrData)" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+@if(!!qrData.footer) {
+{{qrData.footer}}
+}
