@@ -26,9 +26,9 @@ export const PAGE_SIZE_DIMENSIONS_MM: Record<QrDisplaySizeEnum, { widthMm: numbe
     }, {} as Record<QrDisplaySizeEnum, { widthMm: number; heightMm: number }>);
 
 /** Popular DPI choices for the export resolution. */
-export const DPI_OPTIONS: number[] = [72, 96, 150, 200, 300, 600];
+export const DPI_OPTIONS: number[] = [72, 96, 150, 200, 300];
 
-export const DEFAULT_DPI: number = 300;
+export const DEFAULT_DPI: number = 150;
 
 export const DEFAULT_QR_CODE_DATA: GenerateQrFormInterface = {
     iban: '',
