@@ -1,0 +1,30 @@
+// Right-to-left overrides applied when the document is in Arabic (or any RTL
+// language). Bootstrap's flex utilities mirror automatically with `dir="rtl"`,
+// so we only need to flip the handful of physical-direction utilities the app
+// actually uses.
+[dir="rtl"] {
+    // Header: brand pushes the nav + language toggle to the opposite edge.
+    @media (min-width: 768px) {
+        .me-md-auto {
+            margin-right: 0 !important;
+            margin-left: auto !important;
+        }
+
+        .me-md-3 {
+            margin-right: 0 !important;
+            margin-left: 1rem !important;
+        }
+    }
+
+    // Bootstrap checkboxes float/pad on the left by default; mirror them.
+    .form-check {
+        padding-right: 1.5em;
+        padding-left: 0;
+    }
+
+    .form-check .form-check-input {
+        float: right;
+        margin-right: -1.5em;
+        margin-left: 0;
+    }
+}
