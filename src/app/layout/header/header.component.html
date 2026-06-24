@@ -5,14 +5,15 @@
                 <span class="fs-4">{{ 'header.brand' | translate }}</span>
             </a>
 
-            <ul class="nav nav-pills me-md-3 mb-3 mb-md-0">
+            <ul class="nav nav-pills mb-3 mb-md-0">
                 <li class="nav-item"><a class="nav-link" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">{{ 'header.nav.home' | translate }}</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/generate-qr" routerLinkActive="active" ariaCurrentWhenActive="page">{{ 'header.nav.generateQr' | translate }}</a></li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-secondary h-100" (click)="toggleLanguage()" [attr.aria-label]="'Switch language'">
+                        {{ translation.oppositeLanguageLabel }}
+                    </button>
+                </li>
             </ul>
-
-            <button type="button" class="btn btn-outline-secondary py-2 px-3 language-toggle" (click)="toggleLanguage()" [attr.aria-label]="'Switch language'">
-                {{ translation.oppositeLanguageLabel }}
-            </button>
         </header>
     </div>
 </div>
