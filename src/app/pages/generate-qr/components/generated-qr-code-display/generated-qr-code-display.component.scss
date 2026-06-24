@@ -1,13 +1,14 @@
-.print-aspect-ratio {
-    aspect-ratio: 1/1.4142;
-}
-
 .blur {
     filter: blur(5px);
 }
 
 .width-300px {
     width: 300px;
+}
+
+.width-420px {
+    width: 420px;
+    max-width: 100%;
 }
 
 .font-size-10px {

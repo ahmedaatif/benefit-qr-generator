@@ -39,7 +39,7 @@ export class GenerateQrComponent {
       const node = this.qrDisplayRef?.nativeElement;
       if (!node) return;
 
-      toPng(node, { canvasWidth: getWidthFromQrDisplaySize(data.pageSize), canvasHeight: getHeightFromQrDisplaySize(data.pageSize), backgroundColor: '#ffffff' })
+      toPng(node, { canvasWidth: getWidthFromQrDisplaySize(data.pageSize, data.dpi), canvasHeight: getHeightFromQrDisplaySize(data.pageSize, data.dpi), backgroundColor: '#ffffff' })
         .then((dataUrl) => download(dataUrl, `${data.iban}-${data.amount}BHD.png`));
     }, 100);
   }

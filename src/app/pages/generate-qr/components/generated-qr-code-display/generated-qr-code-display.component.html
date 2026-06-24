@@ -1,4 +1,4 @@
-<div class="width-300px print-aspect-ratio h-100 d-flex flex-column align-items-center justify-content-between overflow-hidden">
+<div [class]="isLandscape ? 'width-420px' : 'width-300px'" [style.aspect-ratio]="aspectRatio" class="h-100 d-flex flex-column align-items-center justify-content-between overflow-hidden">
     <div class="w-100">
         @if(!!qrData.header) {
         <div class="bg-primary p-2">
