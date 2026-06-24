@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } 
 import { ibanValidator } from '../../../../shared/validators/iban-validator';
 import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
 import { GenerateQrFormInterface } from '../../interfaces/generate-qr-form.interface';
+import { DEFAULT_DPI, DPI_OPTIONS, PAGE_SIZE_OPTIONS, PageSizeOption } from '../../constants/generate-qr.constants';
 
 @Component({
   selector: 'app-form-input',
@@ -17,12 +18,15 @@ export class FormInputComponent {
 
   public submit: boolean = false;
 
-  public qrDisplaySizeEnum: typeof QrDisplaySizeEnum = QrDisplaySizeEnum;
+  public pageSizeOptions: PageSizeOption[] = PAGE_SIZE_OPTIONS;
+
+  public dpiOptions: number[] = DPI_OPTIONS;
 
   public ibanForm = new FormGroup({
     iban: new FormControl<string>('', [Validators.required, ibanValidator()]),
     amount: new FormControl<number | null>(null, [Validators.required]),
     pageSize: new FormControl<QrDisplaySizeEnum>(QrDisplaySizeEnum.A4),
+    dpi: new FormControl<number>(DEFAULT_DPI),
     header: new FormControl<string>(''),
     footer: new FormControl<string>(''),
     showIban: new FormControl<boolean>(false)
@@ -53,6 +57,7 @@ export class FormInputComponent {
       iban: '',
       amount: null,
       pageSize: QrDisplaySizeEnum.A4,
+      dpi: DEFAULT_DPI,
       header: '',
       footer: '',
       showIban: false

@@ -4,6 +4,7 @@ export interface GenerateQrFormInterface extends BenefitQrCodeInterface {
     header?: string;
     footer?: string;
     pageSize: QrDisplaySizeEnum;
+    dpi: number;
     showIban: boolean;
 }
 
