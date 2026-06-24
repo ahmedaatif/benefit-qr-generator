@@ -4,7 +4,7 @@ import {
   Direction,
   LANGUAGE_META,
   Language,
-  TRANSLATIONS,
+  LOCALES,
   TranslationKey,
 } from './translations';
 
@@ -45,8 +45,7 @@ export class TranslationService {
 
   /** Translate a key into the active language. */
   public translate(key: TranslationKey): string {
-    const entry = TRANSLATIONS[key];
-    return entry ? entry[this._language()] : key;
+    return LOCALES[this._language()][key] ?? key;
   }
 
   public setLanguage(language: Language): void {
