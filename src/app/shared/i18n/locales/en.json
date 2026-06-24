@@ -1,0 +1,52 @@
+{
+  "header.brand": "Benefit QR Generator",
+  "header.nav.home": "Home",
+  "header.nav.generateQr": "Generate QR",
+
+  "home.hero.title": "Generate Stunning Benefit QR Codes Instantly!",
+  "home.hero.subtitle": "Create custom Benefit QR codes for your business, events, or personal use with ease.",
+  "home.hero.cta": "Generate Your QR Code Now!",
+  "home.features.title": "Powerful Features at Your Fingertips",
+  "home.features.sizes.title": "Customizable Sizes",
+  "home.features.sizes.text": "Adjust the size of your Benefit QR code to fit perfectly wherever you need it.",
+  "home.features.headerFooter.title": "Header and Footers",
+  "home.features.headerFooter.text": "Need to add supporting text? We got you covered with the optional header and footers!",
+  "home.features.preview.title": "Live Preview",
+  "home.features.preview.text": "See your Benefit QR code change in real-time as you customize it, ensuring you get exactly what you envision.",
+
+  "footer.title": "Benefit QR Generator",
+  "footer.description": "benefit.ahmed.plus is a free service to allow you to generate QR codes for your various payment needs.",
+  "footer.openSource.prefix": "This website is open source and available on",
+  "footer.openSource.suffix": ". Contribution is welcome!",
+
+  "generateQr.iban.label": "IBAN",
+  "generateQr.iban.placeholder": "IBAN",
+  "generateQr.iban.help": "International Bank Account Number",
+  "generateQr.iban.invalid": "Entered IBAN is invalid",
+  "generateQr.amount.label": "Amount",
+  "generateQr.amount.placeholder": "Amount (BHD)",
+  "generateQr.header.label": "Header",
+  "generateQr.header.help": "Will be displayed above the QR code",
+  "generateQr.footer.label": "Footer",
+  "generateQr.footer.help": "Will be displayed below the QR code",
+  "generateQr.optional": "Optional",
+  "generateQr.pageSize.label": "Page Size",
+  "generateQr.dpi.label": "DPI (resolution)",
+  "generateQr.dpi.help": "Higher DPI produces a larger, sharper image for the chosen page size",
+  "generateQr.showIban": "Show IBAN",
+  "generateQr.save": "Save",
+  "generateQr.required": "This field is required.",
+
+  "generateQr.size.A3": "A3 Portrait (297 × 420mm)",
+  "generateQr.size.A4": "A4 Portrait (210 × 297mm)",
+  "generateQr.size.A5": "A5 Portrait (148 × 210mm)",
+  "generateQr.size.A3_LANDSCAPE": "A3 Landscape (420 × 297mm)",
+  "generateQr.size.A4_LANDSCAPE": "A4 Landscape (297 × 210mm)",
+  "generateQr.size.A5_LANDSCAPE": "A5 Landscape (210 × 148mm)",
+
+  "generateQr.success.title": "Generated QR code successfully!",
+  "generateQr.success.subtitle": "The file should start downloading soon.",
+  "generateQr.success.again": "Generate another",
+
+  "notFound.message": "Page not found."
+}

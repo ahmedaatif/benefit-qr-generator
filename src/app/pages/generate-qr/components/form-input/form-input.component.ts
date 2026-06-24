@@ -4,10 +4,11 @@ import { ibanValidator } from '../../../../shared/validators/iban-validator';
 import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
 import { GenerateQrFormInterface } from '../../interfaces/generate-qr-form.interface';
 import { DEFAULT_DPI, DPI_OPTIONS, PAGE_SIZE_OPTIONS, PageSizeOption } from '../../constants/generate-qr.constants';
+import { TranslatePipe } from '../../../../shared/i18n/translate.pipe';
 
 @Component({
   selector: 'app-form-input',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss'
 })

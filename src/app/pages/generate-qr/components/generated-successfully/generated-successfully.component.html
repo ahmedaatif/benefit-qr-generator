@@ -1,7 +1,7 @@
 <div class="text-center">
-    <h4 class="text-primary">Generated QR code successfully!</h4>
-    <p class="text-secondary">The file should start downloading soon.</p>
+    <h4 class="text-primary">{{ 'generateQr.success.title' | translate }}</h4>
+    <p class="text-secondary">{{ 'generateQr.success.subtitle' | translate }}</p>
     <br />
     <br />
-    <button class="btn btn-primary" (click)="showForm.emit()">Generate another</button>
+    <button class="btn btn-primary" (click)="showForm.emit()">{{ 'generateQr.success.again' | translate }}</button>
 </div>

@@ -1,0 +1,52 @@
+{
+  "header.brand": "مولّد رمز بنفت QR",
+  "header.nav.home": "الرئيسية",
+  "header.nav.generateQr": "إنشاء رمز QR",
+
+  "home.hero.title": "أنشئ رموز بنفت QR مذهلة على الفور!",
+  "home.hero.subtitle": "أنشئ رموز بنفت QR مخصصة لعملك أو فعالياتك أو استخدامك الشخصي بكل سهولة.",
+  "home.hero.cta": "أنشئ رمز QR الخاص بك الآن!",
+  "home.features.title": "ميزات قوية في متناول يدك",
+  "home.features.sizes.title": "أحجام قابلة للتخصيص",
+  "home.features.sizes.text": "اضبط حجم رمز بنفت QR ليناسب المكان الذي تحتاجه تمامًا.",
+  "home.features.headerFooter.title": "الرأس والتذييل",
+  "home.features.headerFooter.text": "تحتاج إلى إضافة نص داعم؟ نوفّر لك ذلك عبر الرأس والتذييل الاختياريين!",
+  "home.features.preview.title": "معاينة مباشرة",
+  "home.features.preview.text": "شاهد رمز بنفت QR يتغيّر في الوقت الفعلي أثناء تخصيصه لتحصل على ما تتخيّله تمامًا.",
+
+  "footer.title": "مولّد رمز بنفت QR",
+  "footer.description": "benefit.ahmed.plus هي خدمة مجانية تتيح لك إنشاء رموز QR لاحتياجات الدفع المختلفة.",
+  "footer.openSource.prefix": "هذا الموقع مفتوح المصدر ومتاح على",
+  "footer.openSource.suffix": ". المساهمات مرحّب بها!",
+
+  "generateQr.iban.label": "رقم الآيبان",
+  "generateQr.iban.placeholder": "رقم الآيبان",
+  "generateQr.iban.help": "رقم الحساب المصرفي الدولي",
+  "generateQr.iban.invalid": "رقم الآيبان المُدخل غير صالح",
+  "generateQr.amount.label": "المبلغ",
+  "generateQr.amount.placeholder": "المبلغ (د.ب)",
+  "generateQr.header.label": "الرأس",
+  "generateQr.header.help": "سيظهر أعلى رمز QR",
+  "generateQr.footer.label": "التذييل",
+  "generateQr.footer.help": "سيظهر أسفل رمز QR",
+  "generateQr.optional": "اختياري",
+  "generateQr.pageSize.label": "حجم الصفحة",
+  "generateQr.dpi.label": "الدقة (DPI)",
+  "generateQr.dpi.help": "تنتج دقة DPI أعلى صورة أكبر وأوضح لحجم الصفحة المختار",
+  "generateQr.showIban": "إظهار رقم الآيبان",
+  "generateQr.save": "حفظ",
+  "generateQr.required": "هذا الحقل مطلوب.",
+
+  "generateQr.size.A3": "A3 عمودي (297 × 420 مم)",
+  "generateQr.size.A4": "A4 عمودي (210 × 297 مم)",
+  "generateQr.size.A5": "A5 عمودي (148 × 210 مم)",
+  "generateQr.size.A3_LANDSCAPE": "A3 أفقي (420 × 297 مم)",
+  "generateQr.size.A4_LANDSCAPE": "A4 أفقي (297 × 210 مم)",
+  "generateQr.size.A5_LANDSCAPE": "A5 أفقي (210 × 148 مم)",
+
+  "generateQr.success.title": "تم إنشاء رمز QR بنجاح!",
+  "generateQr.success.subtitle": "سيبدأ تنزيل الملف قريبًا.",
+  "generateQr.success.again": "إنشاء رمز آخر",
+
+  "notFound.message": "الصفحة غير موجودة."
+}

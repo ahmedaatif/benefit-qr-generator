@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TranslatePipe } from '../../../../shared/i18n/translate.pipe';
 
 @Component({
   selector: 'app-generated-successfully',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './generated-successfully.component.html',
   styleUrl: './generated-successfully.component.scss'
 })

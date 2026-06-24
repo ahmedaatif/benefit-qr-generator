@@ -1,68 +1,68 @@
 <form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" (change)="onChange()" class="row gy-2">
     <div class="col-12 col-lg-8">
-        <label for="iban">IBAN <span class="text-danger">*</span></label>
-        <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" placeholder="IBAN">
-        <div id="ibanHelp" class="form-text">International Bank Account Number</div>
+        <label for="iban">{{ 'generateQr.iban.label' | translate }} <span class="text-danger">*</span></label>
+        <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" [placeholder]="'generateQr.iban.placeholder' | translate">
+        <div id="ibanHelp" class="form-text">{{ 'generateQr.iban.help' | translate }}</div>
         @if(submit && ibanForm.invalid) {
         @if(iban?.hasError('required')) {
         <div class="invalid-feedback">
-            This field is required.
+            {{ 'generateQr.required' | translate }}
         </div>
         }
         @if(iban?.hasError('invalidIban')) {
         <div class="invalid-feedback">
-            Entered IBAN is invalid
+            {{ 'generateQr.iban.invalid' | translate }}
         </div>
         }
         }
     </div>
 
     <div class="col-12 col-lg-4">
-        <label for="amount">Amount <span class="text-danger">*</span></label>
-        <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" placeholder="Amount (BHD)">
+        <label for="amount">{{ 'generateQr.amount.label' | translate }} <span class="text-danger">*</span></label>
+        <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" [placeholder]="'generateQr.amount.placeholder' | translate">
         @if(submit && amount?.hasError('required')) {
         <div class="invalid-feedback">
-            This field is required.
+            {{ 'generateQr.required' | translate }}
         </div>
         }
     </div>
 
     <div class="col-12 col-lg-6">
-        <label for="header">Header</label>
-        <input type="text" formControlName="header" class="form-control" placeholder="Optional">
-        <div id="header" class="form-text">Will be displayed above the QR code</div>
+        <label for="header">{{ 'generateQr.header.label' | translate }}</label>
+        <input type="text" formControlName="header" class="form-control" [placeholder]="'generateQr.optional' | translate">
+        <div id="header" class="form-text">{{ 'generateQr.header.help' | translate }}</div>
     </div>
     <div class="col-12 col-lg-6">
-        <label for="footer">Footer</label>
-        <input type="text" formControlName="footer" class="form-control" placeholder="Optional">
-        <div id="footer" class="form-text">Will be displayed below the QR code</div>
+        <label for="footer">{{ 'generateQr.footer.label' | translate }}</label>
+        <input type="text" formControlName="footer" class="form-control" [placeholder]="'generateQr.optional' | translate">
+        <div id="footer" class="form-text">{{ 'generateQr.footer.help' | translate }}</div>
     </div>
     <div class="col-12 col-lg-6">
-        <label for="pageSize">Page Size</label>
+        <label for="pageSize">{{ 'generateQr.pageSize.label' | translate }}</label>
         <select class="form-select" formControlName="pageSize" id="pageSize">
             @for(option of pageSizeOptions; track option.value) {
-            <option [value]="option.value">{{ option.label }}</option>
+            <option [value]="option.value">{{ option.labelKey | translate }}</option>
             }
         </select>
     </div>
     <div class="col-12 col-lg-6">
-        <label for="dpi">DPI (resolution)</label>
+        <label for="dpi">{{ 'generateQr.dpi.label' | translate }}</label>
         <select class="form-select" formControlName="dpi" id="dpi">
             @for(dpi of dpiOptions; track dpi) {
             <option [ngValue]="dpi">{{ dpi }} DPI</option>
             }
         </select>
-        <div class="form-text">Higher DPI produces a larger, sharper image for the chosen page size</div>
+        <div class="form-text">{{ 'generateQr.dpi.help' | translate }}</div>
     </div>
     <div class="col-12">
         <div class="form-check">
             <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
             <label class="form-check-label" for="showIban">
-                Show IBAN
+                {{ 'generateQr.showIban' | translate }}
             </label>
         </div>
     </div>
     <div class="col">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">{{ 'generateQr.save' | translate }}</button>
     </div>
 </form>
