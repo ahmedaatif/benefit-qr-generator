@@ -1,68 +1,162 @@
-<form [formGroup]="ibanForm" (ngSubmit)="onSubmit()" (change)="onChange()" class="row gy-2">
-    <div class="col-12 col-lg-8">
-        <label for="iban">{{ 'generateQr.iban.label' | translate }} <span class="text-danger">*</span></label>
-        <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('iban')?.invalid}" id="iban" [placeholder]="'generateQr.iban.placeholder' | translate">
-        <div id="ibanHelp" class="form-text">{{ 'generateQr.iban.help' | translate }}</div>
-        @if(submit && ibanForm.invalid) {
-        @if(iban?.hasError('required')) {
-        <div class="invalid-feedback">
-            {{ 'generateQr.required' | translate }}
+<form [formGroup]="ibanForm" (ngSubmit)="onFormSubmit()" class="d-flex flex-column justify-content-between h-100">
+
+    <!-- Step indicator -->
+    <ol class="stepper list-unstyled d-flex align-items-start justify-content-between my-4">
+        @for(step of steps; track step.titleKey; let i = $index) {
+        <li class="stepper-item flex-fill text-center" [class.active]="i === currentStep" [class.done]="i < currentStep" [class.clickable]="i <= currentStep || canReach(i)">
+            <button type="button" class="stepper-dot" (click)="goToStep(i)" [disabled]="!(i <= currentStep || canReach(i))">
+                @if(i < currentStep) { ✓ } @else { {{ i + 1 }} } </button>
+                    <div class="stepper-label small mt-1">{{ step.titleKey | translate }}</div>
+        </li>
+        }
+    </ol>
+
+    <div class="flex-grow-1">
+        @switch (currentStep) {
+
+        <!-- Step 1: Payment details -->
+        @case (0) {
+        <div class="row gy-2">
+            <div class="col-12">
+                <label for="iban">{{ 'generateQr.iban.label' | translate }} <span class="text-danger">*</span></label>
+                <input type="text" formControlName="iban" class="form-control" [class]="{'is-invalid': submit && iban?.invalid}" id="iban" [placeholder]="'generateQr.iban.placeholder' | translate">
+                <div id="ibanHelp" class="form-text">{{ 'generateQr.iban.help' | translate }}</div>
+                @if(submit && iban?.hasError('required')) {
+                <div class="invalid-feedback">{{ 'generateQr.required' | translate }}</div>
+                }
+                @if(submit && iban?.hasError('invalidIban')) {
+                <div class="invalid-feedback">{{ 'generateQr.iban.invalid' | translate }}</div>
+                }
+            </div>
+            <div class="col-12">
+                <label for="amount">{{ 'generateQr.amount.label' | translate }} <span class="text-danger">*</span></label>
+                <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && amount?.invalid}" id="amount" [placeholder]="'generateQr.amount.placeholder' | translate">
+                @if(submit && amount?.hasError('required')) {
+                <div class="invalid-feedback">{{ 'generateQr.required' | translate }}</div>
+                }
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
+                    <label class="form-check-label" for="showIban">{{ 'generateQr.showIban' | translate }}</label>
+                </div>
+            </div>
         </div>
         }
-        @if(iban?.hasError('invalidIban')) {
-        <div class="invalid-feedback">
-            {{ 'generateQr.iban.invalid' | translate }}
+
+        <!-- Step 2: Content -->
+        @case (1) {
+        <div class="row gy-2">
+            <div class="col-12">
+                <label for="header">{{ 'generateQr.header.label' | translate }}</label>
+                <input type="text" formControlName="header" class="form-control" id="header" [placeholder]="'generateQr.optional' | translate">
+                <div class="form-text">{{ 'generateQr.header.help' | translate }}</div>
+            </div>
+            <div class="col-12">
+                <label for="footer">{{ 'generateQr.footer.label' | translate }}</label>
+                <input type="text" formControlName="footer" class="form-control" id="footer" [placeholder]="'generateQr.optional' | translate">
+                <div class="form-text">{{ 'generateQr.footer.help' | translate }}</div>
+            </div>
+        </div>
+        }
+
+        <!-- Step 3: Format & Size -->
+        @case (2) {
+        <div class="row gy-2">
+            <div class="col-12 col-lg-6">
+                <label for="pageSize">{{ 'generateQr.pageSize.label' | translate }}</label>
+                <select class="form-select" formControlName="pageSize" id="pageSize">
+                    @for(group of pageSizeGroups; track group.labelKey) {
+                    <optgroup [label]="group.labelKey | translate">
+                        @for(option of group.options; track option.value) {
+                        <option [value]="option.value">{{ option.labelKey | translate }}</option>
+                        }
+                    </optgroup>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="dpi">{{ 'generateQr.dpi.label' | translate }}</label>
+                <select class="form-select" formControlName="dpi" id="dpi">
+                    @for(dpi of dpiOptions; track dpi) {
+                    <option [ngValue]="dpi">{{ dpi }} DPI</option>
+                    }
+                </select>
+                <div class="form-text">{{ (dpiDisabled ? 'generateQr.dpi.notApplicable' : 'generateQr.dpi.help') | translate }}</div>
+            </div>
+        </div>
+        }
+
+        <!-- Step 4: Appearance / Theme -->
+        @case (3) {
+        <div class="row gy-3">
+            <div class="col-12">
+                <label class="d-block mb-1">{{ 'generateQr.theme.preset.label' | translate }}</label>
+                <div class="d-flex flex-wrap gap-2">
+                    @for(preset of themePresets; track preset.id) {
+                    <button type="button" class="btn btn-sm" [class.btn-primary]="activePreset === preset.id" [class.btn-outline-secondary]="activePreset !== preset.id" (click)="applyPreset(preset)">
+                        {{ preset.labelKey | translate }}
+                    </button>
+                    }
+                    @if(activePreset === 'custom') {
+                    <span class="btn btn-sm btn-primary disabled">{{ 'generateQr.theme.preset.custom' | translate }}</span>
+                    }
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <label for="headerBgColor" class="form-label small">{{ 'generateQr.theme.headerBg' | translate }}</label>
+                <input type="color" class="form-control form-control-color w-100" formControlName="headerBgColor" id="headerBgColor" (input)="onColorEdited()">
+            </div>
+            <div class="col-6 col-lg-3">
+                <label for="headerTextColor" class="form-label small">{{ 'generateQr.theme.headerText' | translate }}</label>
+                <input type="color" class="form-control form-control-color w-100" formControlName="headerTextColor" id="headerTextColor" (input)="onColorEdited()">
+            </div>
+            <div class="col-6 col-lg-3">
+                <label for="footerTextColor" class="form-label small">{{ 'generateQr.theme.footerText' | translate }}</label>
+                <input type="color" class="form-control form-control-color w-100" formControlName="footerTextColor" id="footerTextColor" (input)="onColorEdited()">
+            </div>
+            <div class="col-6 col-lg-3">
+                <label for="ibanTextColor" class="form-label small">{{ 'generateQr.theme.ibanText' | translate }}</label>
+                <input type="color" class="form-control form-control-color w-100" formControlName="ibanTextColor" id="ibanTextColor" (input)="onColorEdited()">
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <label for="fontFamily">{{ 'generateQr.theme.font' | translate }}</label>
+                <select class="form-select" formControlName="fontFamily" id="fontFamily">
+                    @for(font of fontOptions; track font.value) {
+                    <option [value]="font.value">{{ font.labelKey | translate }}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="fontSize">{{ 'generateQr.theme.fontSize' | translate }}</label>
+                <select class="form-select" formControlName="fontSize" id="fontSize">
+                    @for(size of fontSizeOptions; track size.value) {
+                    <option [ngValue]="size.value">{{ size.labelKey | translate }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12">
+                <button type="button" class="btn btn-sm btn-link px-0" (click)="resetTheme()">
+                    {{ 'generateQr.theme.reset' | translate }}
+                </button>
+            </div>
         </div>
         }
         }
     </div>
 
-    <div class="col-12 col-lg-4">
-        <label for="amount">{{ 'generateQr.amount.label' | translate }} <span class="text-danger">*</span></label>
-        <input type="text" formControlName="amount" class="form-control" [class]="{'is-invalid': submit && ibanForm.get('amount')?.invalid}" id="amount" [placeholder]="'generateQr.amount.placeholder' | translate">
-        @if(submit && amount?.hasError('required')) {
-        <div class="invalid-feedback">
-            {{ 'generateQr.required' | translate }}
-        </div>
+    <!-- Navigation -->
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <button type="button" class="btn btn-outline-secondary" (click)="back()" [class.invisible]="currentStep === 0">
+            {{ 'generateQr.nav.back' | translate }}
+        </button>
+        @if(isLastStep) {
+        <button type="submit" class="btn btn-primary">{{ 'generateQr.nav.generate' | translate }}</button>
+        } @else {
+        <button type="submit" class="btn btn-primary">{{ 'generateQr.nav.next' | translate }}</button>
         }
-    </div>
-
-    <div class="col-12 col-lg-6">
-        <label for="header">{{ 'generateQr.header.label' | translate }}</label>
-        <input type="text" formControlName="header" class="form-control" [placeholder]="'generateQr.optional' | translate">
-        <div id="header" class="form-text">{{ 'generateQr.header.help' | translate }}</div>
-    </div>
-    <div class="col-12 col-lg-6">
-        <label for="footer">{{ 'generateQr.footer.label' | translate }}</label>
-        <input type="text" formControlName="footer" class="form-control" [placeholder]="'generateQr.optional' | translate">
-        <div id="footer" class="form-text">{{ 'generateQr.footer.help' | translate }}</div>
-    </div>
-    <div class="col-12 col-lg-6">
-        <label for="pageSize">{{ 'generateQr.pageSize.label' | translate }}</label>
-        <select class="form-select" formControlName="pageSize" id="pageSize">
-            @for(option of pageSizeOptions; track option.value) {
-            <option [value]="option.value">{{ option.labelKey | translate }}</option>
-            }
-        </select>
-    </div>
-    <div class="col-12 col-lg-6">
-        <label for="dpi">{{ 'generateQr.dpi.label' | translate }}</label>
-        <select class="form-select" formControlName="dpi" id="dpi">
-            @for(dpi of dpiOptions; track dpi) {
-            <option [ngValue]="dpi">{{ dpi }} DPI</option>
-            }
-        </select>
-        <div class="form-text">{{ 'generateQr.dpi.help' | translate }}</div>
-    </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" formControlName="showIban" id="showIban">
-            <label class="form-check-label" for="showIban">
-                {{ 'generateQr.showIban' | translate }}
-            </label>
-        </div>
-    </div>
-    <div class="col">
-        <button type="submit" class="btn btn-primary">{{ 'generateQr.save' | translate }}</button>
     </div>
 </form>

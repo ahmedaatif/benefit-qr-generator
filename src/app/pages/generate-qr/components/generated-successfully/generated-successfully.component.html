@@ -1,7 +1,13 @@
-<div class="text-center">
-    <h4 class="text-primary">{{ 'generateQr.success.title' | translate }}</h4>
-    <p class="text-secondary">{{ 'generateQr.success.subtitle' | translate }}</p>
-    <br />
-    <br />
-    <button class="btn btn-primary" (click)="showForm.emit()">{{ 'generateQr.success.again' | translate }}</button>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="text-center">
+        <h4 class="text-primary">{{ 'generateQr.success.title' | translate }}</h4>
+        <p class="text-secondary">{{ 'generateQr.success.subtitle' | translate }}</p>
+        <br />
+        <br />
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn btn-outline-secondary" (click)="editQr.emit()">{{ 'generateQr.success.modify' | translate }}</button>
+            <button class="btn btn-primary" (click)="showForm.emit()">{{ 'generateQr.success.again' | translate }}</button>
+        </div>
+    </div>
+
 </div>

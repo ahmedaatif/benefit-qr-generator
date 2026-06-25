@@ -1,10 +1,6 @@
-$nav-pills-link-active-color: $black;
-$nav-pills-link-active-bg: $secondary;
-$nav-link-color: $secondary;
-
+// App-level overrides that need to win over Bootstrap's defaults. The related
+// nav variables ($nav-link-color, $nav-pills-link-active-*) are configured where
+// Bootstrap is loaded in styles.scss.
 .nav-link:hover {
-    color: $black !important;
+    color: #000000 !important;
 }
-
-// $component-active-color: $primary !default;
-// $component-active-bg: $primary !default;

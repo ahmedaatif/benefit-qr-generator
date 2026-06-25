@@ -8,5 +8,8 @@ import { TranslatePipe } from '../../../../shared/i18n/translate.pipe';
   styleUrl: './generated-successfully.component.scss'
 })
 export class GeneratedSuccessfullyComponent {
+  /** Start over with a blank form. */
   @Output() public showForm: EventEmitter<void> = new EventEmitter<void>();
+  /** Return to the form keeping the values that were just generated. */
+  @Output() public editQr: EventEmitter<void> = new EventEmitter<void>();
 }
