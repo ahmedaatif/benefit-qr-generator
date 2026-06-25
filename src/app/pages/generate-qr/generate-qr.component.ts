@@ -4,7 +4,7 @@ import { GeneratedQrCodeDisplayComponent } from "./components/generated-qr-code-
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 import { GenerateQrFormInterface } from './interfaces/generate-qr-form.interface';
-import { getHeightFromQrDisplaySize, getWidthFromQrDisplaySize } from './util/generate-qr-code-util';
+import { getExportDimensions } from './util/generate-qr-code-util';
 import { DEFAULT_QR_CODE_DATA } from './constants/generate-qr.constants';
 import { GeneratedSuccessfullyComponent } from "./components/generated-successfully/generated-successfully.component";
 @Component({
@@ -39,7 +39,8 @@ export class GenerateQrComponent {
       const node = this.qrDisplayRef?.nativeElement;
       if (!node) return;
 
-      toPng(node, { canvasWidth: getWidthFromQrDisplaySize(data.pageSize, data.dpi), canvasHeight: getHeightFromQrDisplaySize(data.pageSize, data.dpi), backgroundColor: '#ffffff' })
+      const { width, height } = getExportDimensions(data.pageSize, data.dpi);
+      toPng(node, { canvasWidth: width, canvasHeight: height, backgroundColor: '#ffffff' })
         .then((dataUrl) => download(dataUrl, `${data.iban}-${data.amount}BHD.png`));
     }, 100);
   }

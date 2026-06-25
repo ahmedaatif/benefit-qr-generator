@@ -40,8 +40,12 @@
     <div class="col-12 col-lg-6">
         <label for="pageSize">{{ 'generateQr.pageSize.label' | translate }}</label>
         <select class="form-select" formControlName="pageSize" id="pageSize">
-            @for(option of pageSizeOptions; track option.value) {
-            <option [value]="option.value">{{ option.labelKey | translate }}</option>
+            @for(group of pageSizeGroups; track group.labelKey) {
+            <optgroup [label]="group.labelKey | translate">
+                @for(option of group.options; track option.value) {
+                <option [value]="option.value">{{ option.labelKey | translate }}</option>
+                }
+            </optgroup>
             }
         </select>
     </div>
@@ -52,7 +56,7 @@
             <option [ngValue]="dpi">{{ dpi }} DPI</option>
             }
         </select>
-        <div class="form-text">{{ 'generateQr.dpi.help' | translate }}</div>
+        <div class="form-text">{{ (dpiDisabled ? 'generateQr.dpi.notApplicable' : 'generateQr.dpi.help') | translate }}</div>
     </div>
     <div class="col-12">
         <div class="form-check">

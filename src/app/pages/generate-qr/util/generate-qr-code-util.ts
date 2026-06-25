@@ -1,4 +1,4 @@
-import { PAGE_SIZE_DIMENSIONS_MM } from "../constants/generate-qr.constants";
+import { PAGE_SIZE_DIMENSIONS } from "../constants/generate-qr.constants";
 import { QrDisplaySizeEnum } from "../enums/qr-display-size.enum";
 
 const MM_PER_INCH = 25.4;
@@ -8,10 +8,14 @@ export function mmToPixels(mm: number, dpi: number): number {
     return Math.round((mm / MM_PER_INCH) * dpi);
 }
 
-export function getWidthFromQrDisplaySize(qrSize: QrDisplaySizeEnum, dpi: number): number {
-    return mmToPixels(PAGE_SIZE_DIMENSIONS_MM[qrSize].widthMm, dpi);
-}
-
-export function getHeightFromQrDisplaySize(qrSize: QrDisplaySizeEnum, dpi: number): number {
-    return mmToPixels(PAGE_SIZE_DIMENSIONS_MM[qrSize].heightMm, dpi);
+/**
+ * Export canvas size in pixels for the chosen page size. Print sizes scale by DPI;
+ * screen/social sizes use their fixed pixel dimensions and ignore DPI.
+ */
+export function getExportDimensions(qrSize: QrDisplaySizeEnum, dpi: number): { width: number; height: number } {
+    const size = PAGE_SIZE_DIMENSIONS[qrSize];
+    if (size.pixelNative) {
+        return { width: size.width, height: size.height };
+    }
+    return { width: mmToPixels(size.width, dpi), height: mmToPixels(size.height, dpi) };
 }
