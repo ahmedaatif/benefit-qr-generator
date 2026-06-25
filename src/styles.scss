@@ -1,11 +1,15 @@
-// TODO replace import with @use or @forward for future support
+// Bootstrap, configured with the app's brand colours and a few nav overrides.
+// Using @use (the modern Sass module system) instead of the deprecated @import.
+// Bootstrap derives $theme-colors from $primary/$secondary, so overriding those
+// two is enough — no manual map-merge needed.
+@use "bootstrap/scss/bootstrap" with (
+    $primary: #e90030,
+    $secondary: #a4988e,
+    $nav-link-color: #a4988e,
+    $nav-pills-link-active-color: #000000,
+    $nav-pills-link-active-bg: #a4988e
+);
 
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-
-@import "./scss/theme-colors.scss";
-@import "./scss/util.scss";
-
-@import "bootstrap/scss/bootstrap";
-
-@import "./scss/rtl";
+// App-level overrides and RTL tweaks, emitted after Bootstrap so they win.
+@use "./scss/util";
+@use "./scss/rtl";
