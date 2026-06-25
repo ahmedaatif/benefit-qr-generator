@@ -1,0 +1,66 @@
+.stepper {
+    position: relative;
+}
+
+.stepper-item {
+    position: relative;
+
+    // Connector line to the previous dot. Logical offsets keep it correct in RTL.
+    &:not(:first-child)::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        inset-inline-end: 50%;
+        inset-inline-start: -50%;
+        height: 2px;
+        background-color: var(--bs-border-color);
+        z-index: 0;
+    }
+
+    &.done::before,
+    &.active::before {
+        background-color: var(--bs-primary);
+    }
+}
+
+.stepper-dot {
+    position: relative;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--bs-border-color);
+    background-color: var(--bs-body-bg);
+    color: var(--bs-secondary-color);
+    font-weight: 600;
+    line-height: 1;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    // Keep the background opaque so the connector line never shows through;
+    // the muted border/number already signal the disabled (unreachable) state.
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.stepper-item.active .stepper-dot {
+    border-color: var(--bs-primary);
+    background-color: var(--bs-primary);
+    color: #fff;
+}
+
+.stepper-item.done .stepper-dot {
+    border-color: var(--bs-primary);
+    background-color: var(--bs-primary);
+    color: #fff;
+}
+
+.stepper-label {
+    color: var(--bs-secondary-color);
+}
+
+.stepper-item.active .stepper-label,
+.stepper-item.done .stepper-label {
+    color: var(--bs-body-color);
+    font-weight: 600;
+}

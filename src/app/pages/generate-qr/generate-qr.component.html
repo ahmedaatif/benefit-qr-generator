@@ -14,9 +14,9 @@
         <div class="card">
             <div class="card-body min-height-lg-500px d-flex align-items-center">
                 @if(showForm) {
-                <app-form-input class="w-100" (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
+                <app-form-input class="w-100" [data]="editData" (formData)="setQrData($event)" (saveQrImage)="saveQrImage()"></app-form-input>
                 } @else {
-                <app-generated-successfully class="w-100" (showForm)="showFormAndReset()"></app-generated-successfully>
+                <app-generated-successfully class="w-100" (editQr)="editForm()" (showForm)="showFormAndReset()"></app-generated-successfully>
                 }
             </div>
         </div>

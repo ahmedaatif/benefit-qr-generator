@@ -1,5 +1,5 @@
 import { QrDisplaySizeEnum } from "../enums/qr-display-size.enum";
-import { GenerateQrFormInterface } from "../interfaces/generate-qr-form.interface";
+import { GenerateQrFormInterface, QrFontSize, QrThemeInterface } from "../interfaces/generate-qr-form.interface";
 import { TranslationKey } from "../../../shared/i18n/translations";
 
 /** Print sizes are physical (mm) and scale with DPI; screen sizes are a fixed pixel canvas. */
@@ -63,10 +63,84 @@ export const DPI_OPTIONS: number[] = [72, 96, 150, 200, 300];
 
 export const DEFAULT_DPI: number = 150;
 
+/** Default appearance — reproduces the original card look (Benefit red header). */
+export const DEFAULT_THEME: QrThemeInterface = {
+    headerBgColor: '#e90030',
+    headerTextColor: '#ffffff',
+    footerTextColor: '#212529',
+    ibanTextColor: '#212529',
+    fontFamily: '',
+    fontSize: 'md',
+};
+
+export interface ThemePresetOption {
+    /** Stable id; 'custom' is reserved for manual colour edits. */
+    id: string;
+    labelKey: TranslationKey;
+    /** Colour overrides applied when the preset is picked. */
+    colors: Pick<QrThemeInterface, 'headerBgColor' | 'headerTextColor' | 'footerTextColor' | 'ibanTextColor'>;
+}
+
+/** Ready-made colour themes. `applyPreset` patches these onto the form. */
+export const THEME_PRESETS: ThemePresetOption[] = [
+    {
+        id: 'benefit', labelKey: 'generateQr.theme.preset.benefit',
+        colors: { headerBgColor: '#e90030', headerTextColor: '#ffffff', footerTextColor: '#212529', ibanTextColor: '#212529' },
+    },
+    {
+        id: 'dark', labelKey: 'generateQr.theme.preset.dark',
+        colors: { headerBgColor: '#212529', headerTextColor: '#ffffff', footerTextColor: '#212529', ibanTextColor: '#495057' },
+    },
+    {
+        id: 'mono', labelKey: 'generateQr.theme.preset.mono',
+        colors: { headerBgColor: '#000000', headerTextColor: '#ffffff', footerTextColor: '#000000', ibanTextColor: '#6c757d' },
+    },
+    {
+        id: 'ocean', labelKey: 'generateQr.theme.preset.ocean',
+        colors: { headerBgColor: '#0d6efd', headerTextColor: '#ffffff', footerTextColor: '#0a3678', ibanTextColor: '#0a3678' },
+    },
+];
+
+export interface FontOption {
+    labelKey: TranslationKey;
+    /** CSS font-family stack; empty string inherits the app's system font. */
+    value: string;
+}
+
+/** Web-safe font stacks only, so the html-to-image PNG export stays faithful. */
+export const FONT_OPTIONS: FontOption[] = [
+    { labelKey: 'generateQr.theme.font.system', value: '' },
+    { labelKey: 'generateQr.theme.font.arial', value: 'Arial, Helvetica, sans-serif' },
+    { labelKey: 'generateQr.theme.font.verdana', value: 'Verdana, Geneva, sans-serif' },
+    { labelKey: 'generateQr.theme.font.trebuchet', value: '"Trebuchet MS", Helvetica, sans-serif' },
+    { labelKey: 'generateQr.theme.font.georgia', value: 'Georgia, "Times New Roman", serif' },
+    { labelKey: 'generateQr.theme.font.times', value: '"Times New Roman", Times, serif' },
+    { labelKey: 'generateQr.theme.font.courier', value: '"Courier New", Courier, monospace' },
+];
+
+export interface FontSizeOption {
+    labelKey: TranslationKey;
+    value: QrFontSize;
+}
+
+export const FONT_SIZE_OPTIONS: FontSizeOption[] = [
+    { labelKey: 'generateQr.theme.size.sm', value: 'sm' },
+    { labelKey: 'generateQr.theme.size.md', value: 'md' },
+    { labelKey: 'generateQr.theme.size.lg', value: 'lg' },
+];
+
+/** Multiplier applied to the card's text sizes for each font-size choice. */
+export const FONT_SIZE_SCALE: Record<QrFontSize, number> = {
+    sm: 0.85,
+    md: 1,
+    lg: 1.2,
+};
+
 export const DEFAULT_QR_CODE_DATA: GenerateQrFormInterface = {
     iban: '',
     amount: 0,
     pageSize: QrDisplaySizeEnum.A4,
     dpi: DEFAULT_DPI,
-    showIban: true
+    showIban: true,
+    theme: DEFAULT_THEME,
 };

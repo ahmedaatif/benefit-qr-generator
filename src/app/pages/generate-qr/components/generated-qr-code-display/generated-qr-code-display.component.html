@@ -1,17 +1,17 @@
 <div [class]="isLandscape ? 'width-420px' : 'width-300px'" [style.aspect-ratio]="aspectRatio" class="h-100 d-flex flex-column align-items-center justify-content-between overflow-hidden">
     <div class="w-100">
         @if(!!qrData.header) {
-        <div class="bg-primary p-2">
-            <h5 class="text-white mb-0">{{qrData.header}}</h5>
+        <div class="p-2" [style.background-color]="theme.headerBgColor">
+            <h5 class="mb-0" [style.color]="theme.headerTextColor" [style.font-family]="fontFamily" [style.font-size]="headerFontSize">{{qrData.header}}</h5>
         </div> }
     </div>
     <div [class]="{'blur': qrData.iban == ''}">
         <qrcode [width]="140" [qrdata]="populateQrCode(qrData)" [elementType]="'svg'" [errorCorrectionLevel]="'M'"></qrcode>
         @if(qrData.showIban && !!qrData.iban) {
-        <h6>{{qrData.iban}}</h6> }
+        <h6 [style.color]="theme.ibanTextColor" [style.font-family]="fontFamily" [style.font-size]="ibanFontSize">{{qrData.iban}}</h6> }
     </div>
     @if(!!qrData.footer) {
-    <h5 class="p-2 mb-0">{{qrData.footer}}</h5>
+    <h5 class="p-2 mb-0" [style.color]="theme.footerTextColor" [style.font-family]="fontFamily" [style.font-size]="footerFontSize">{{qrData.footer}}</h5>
     }
     <div class="bg-secondary w-100 p-1 d-flex justify-content-center align-items-center">
         <small class="text-white font-size-10px">Generated with <b>benefit.ahmed.plus</b></small>

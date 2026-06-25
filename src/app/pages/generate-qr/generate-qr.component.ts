@@ -22,12 +22,22 @@ export class GenerateQrComponent {
 
   public showForm: boolean = true;
 
+  /** Non-null only when re-opening the form to edit the values that were just generated. */
+  public editData: GenerateQrFormInterface | null = null;
+
   public setQrData(data: GenerateQrFormInterface): void {
     this.qrData = data;
   }
 
   public showFormAndReset(): void {
+    this.editData = null;
     this.qrData = DEFAULT_QR_CODE_DATA;
+    this.showForm = true;
+  }
+
+  /** Re-open the form pre-filled with the generated values so the user can tweak them. */
+  public editForm(): void {
+    this.editData = this.qrData;
     this.showForm = true;
   }
 

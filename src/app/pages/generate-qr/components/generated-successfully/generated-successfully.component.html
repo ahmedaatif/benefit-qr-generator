@@ -3,5 +3,8 @@
     <p class="text-secondary">{{ 'generateQr.success.subtitle' | translate }}</p>
     <br />
     <br />
-    <button class="btn btn-primary" (click)="showForm.emit()">{{ 'generateQr.success.again' | translate }}</button>
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+        <button class="btn btn-outline-secondary" (click)="editQr.emit()">{{ 'generateQr.success.modify' | translate }}</button>
+        <button class="btn btn-primary" (click)="showForm.emit()">{{ 'generateQr.success.again' | translate }}</button>
+    </div>
 </div>
