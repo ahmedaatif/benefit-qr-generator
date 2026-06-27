@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ibanValidator } from '../../../../shared/validators/iban-validator';
 import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
@@ -35,10 +35,10 @@ interface WizardStep {
 export class FormInputComponent implements OnInit {
 
   /** When provided, the form opens pre-filled with these values (edit mode). */
-  @Input() public data: GenerateQrFormInterface | null = null;
+  public readonly data = input<GenerateQrFormInterface | null>(null);
 
-  @Output() private formData: EventEmitter<GenerateQrFormInterface> = new EventEmitter<GenerateQrFormInterface>();
-  @Output() private saveQrImage: EventEmitter<void> = new EventEmitter<void>();
+  public readonly formData = output<GenerateQrFormInterface>();
+  public readonly saveQrImage = output<void>();
 
   public submit: boolean = false;
 
@@ -78,7 +78,8 @@ export class FormInputComponent implements OnInit {
   public ngOnInit(): void {
     this.ibanForm.get('pageSize')!.valueChanges.subscribe((size) => this.syncDpiState(size));
     this.ibanForm.valueChanges.subscribe(() => this.emitFormData());
-    if (this.data) this.initFromData(this.data);
+    const data = this.data();
+    if (data) this.initFromData(data);
   }
 
   /** Pre-fills the form when re-opened to edit previously generated values. */
