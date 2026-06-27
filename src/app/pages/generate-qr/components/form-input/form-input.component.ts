@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ibanValidator } from '../../../../shared/validators/iban-validator';
 import { QrDisplaySizeEnum } from '../../enums/qr-display-size.enum';
@@ -30,6 +30,7 @@ interface WizardStep {
   selector: 'app-form-input',
   imports: [FormsModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './form-input.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './form-input.component.scss'
 })
 export class FormInputComponent implements OnInit {

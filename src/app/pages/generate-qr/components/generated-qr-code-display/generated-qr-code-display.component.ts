@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { BenefitQrCodeInterface, GenerateQrFormInterface, QrThemeInterface } from '../../interfaces/generate-qr-form.interface';
 import { DEFAULT_QR_CODE_DATA, DEFAULT_THEME, FONT_SIZE_SCALE, PAGE_SIZE_DIMENSIONS } from '../../constants/generate-qr.constants';
@@ -7,6 +7,7 @@ import { DEFAULT_QR_CODE_DATA, DEFAULT_THEME, FONT_SIZE_SCALE, PAGE_SIZE_DIMENSI
   selector: 'app-generated-qr-code-display',
   imports: [QRCodeComponent],
   templateUrl: './generated-qr-code-display.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './generated-qr-code-display.component.scss'
 })
 export class GeneratedQrCodeDisplayComponent {
