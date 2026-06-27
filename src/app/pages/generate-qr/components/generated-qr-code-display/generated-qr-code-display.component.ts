@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { BenefitQrCodeInterface, GenerateQrFormInterface, QrThemeInterface } from '../../interfaces/generate-qr-form.interface';
 import { DEFAULT_QR_CODE_DATA, DEFAULT_THEME, FONT_SIZE_SCALE, PAGE_SIZE_DIMENSIONS } from '../../constants/generate-qr.constants';
@@ -11,21 +11,21 @@ import { DEFAULT_QR_CODE_DATA, DEFAULT_THEME, FONT_SIZE_SCALE, PAGE_SIZE_DIMENSI
   styleUrl: './generated-qr-code-display.component.scss'
 })
 export class GeneratedQrCodeDisplayComponent {
-  @Input() public qrData: GenerateQrFormInterface = DEFAULT_QR_CODE_DATA;
+  public readonly qrData = input<GenerateQrFormInterface>(DEFAULT_QR_CODE_DATA);
 
   /** CSS aspect-ratio matching the selected page size so the preview (and exported image) is not distorted. */
   public get aspectRatio(): string {
-    const dimensions = PAGE_SIZE_DIMENSIONS[this.qrData.pageSize];
+    const dimensions = PAGE_SIZE_DIMENSIONS[this.qrData().pageSize];
     return `${dimensions.width} / ${dimensions.height}`;
   }
 
   public get isLandscape(): boolean {
-    const dimensions = PAGE_SIZE_DIMENSIONS[this.qrData.pageSize];
+    const dimensions = PAGE_SIZE_DIMENSIONS[this.qrData().pageSize];
     return dimensions.width > dimensions.height;
   }
 
   public get theme(): QrThemeInterface {
-    return this.qrData.theme ?? DEFAULT_THEME;
+    return this.qrData().theme ?? DEFAULT_THEME;
   }
 
   /** Empty string means "inherit the app font", so resolve it to null to drop the inline style. */

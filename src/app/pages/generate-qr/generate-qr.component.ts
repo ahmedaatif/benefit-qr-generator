@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, ChangeDetectionStrategy, viewChild } from '@angular/core';
 import { FormInputComponent } from "./components/form-input/form-input.component";
 import { GeneratedQrCodeDisplayComponent } from "./components/generated-qr-code-display/generated-qr-code-display.component";
 import { toPng } from 'html-to-image';
@@ -15,7 +15,7 @@ import { GeneratedSuccessfullyComponent } from "./components/generated-successfu
   styleUrl: './generate-qr.component.scss'
 })
 export class GenerateQrComponent {
-  @ViewChild('qrCodeDisplay', { read: ElementRef }) qrDisplayRef!: ElementRef;
+  readonly qrDisplayRef = viewChild.required('qrCodeDisplay', { read: ElementRef });
 
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
@@ -47,7 +47,7 @@ export class GenerateQrComponent {
     const data = this.qrData;
     setTimeout(() => {
       this.cdr.detectChanges();
-      const node = this.qrDisplayRef?.nativeElement;
+      const node = this.qrDisplayRef()?.nativeElement;
       if (!node) return;
 
       const { width, height } = getExportDimensions(data.pageSize, data.dpi);

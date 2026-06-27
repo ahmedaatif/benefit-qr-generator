@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, output } from '@angular/core';
 import { TranslatePipe } from '../../../../shared/i18n/translate.pipe';
 
 @Component({
@@ -10,7 +10,7 @@ import { TranslatePipe } from '../../../../shared/i18n/translate.pipe';
 })
 export class GeneratedSuccessfullyComponent {
   /** Start over with a blank form. */
-  @Output() public showForm: EventEmitter<void> = new EventEmitter<void>();
+  public readonly showForm = output<void>();
   /** Return to the form keeping the values that were just generated. */
-  @Output() public editQr: EventEmitter<void> = new EventEmitter<void>();
+  public readonly editQr = output<void>();
 }
