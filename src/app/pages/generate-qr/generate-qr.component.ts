@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, ChangeDetectionStrategy, viewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { FormInputComponent } from "./components/form-input/form-input.component";
 import { GeneratedQrCodeDisplayComponent } from "./components/generated-qr-code-display/generated-qr-code-display.component";
 import { toPng } from 'html-to-image';
@@ -11,7 +11,6 @@ import { GeneratedSuccessfullyComponent } from "./components/generated-successfu
   selector: 'app-generate-qr',
   imports: [FormInputComponent, GeneratedQrCodeDisplayComponent, GeneratedSuccessfullyComponent],
   templateUrl: './generate-qr.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './generate-qr.component.scss'
 })
 export class GenerateQrComponent {
